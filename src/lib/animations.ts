@@ -19,6 +19,24 @@ export const fadeScale: Variants = {
   },
 };
 
+export const revealLeft: Variants = {
+  hidden: { opacity: 0, x: -36 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const revealRight: Variants = {
+  hidden: { opacity: 0, x: 36 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export const stagger: Variants = {
   hidden: {},
   visible: {

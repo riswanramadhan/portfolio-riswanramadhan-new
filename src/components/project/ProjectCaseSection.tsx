@@ -14,11 +14,12 @@ export function ProjectCaseSection({
   children,
 }: ProjectCaseSectionProps) {
   const reduceMotion = useReducedMotion();
+  const entranceX = Number(index) % 2 === 0 ? 36 : -36;
 
   return (
     <motion.section
-      initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduceMotion ? false : { opacity: 0, x: entranceX }}
+      whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
       className="grid gap-7 border-t border-black/9 py-10 md:grid-cols-[220px_minmax(0,1fr)] md:gap-16 md:py-14"

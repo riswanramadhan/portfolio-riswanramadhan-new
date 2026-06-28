@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 import type { Project } from "@/lib/portfolio-data";
+import { revealLeft, revealRight, stagger } from "@/lib/animations";
 import { ProjectMeta } from "@/components/project/ProjectMeta";
 
 export function ProjectDetailHero({ project }: { project: Project }) {
@@ -12,12 +13,12 @@ export function ProjectDetailHero({ project }: { project: Project }) {
 
   return (
     <motion.section
-      initial={reduceMotion ? false : { opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: reduceMotion ? 0 : 0.75, ease: [0.22, 1, 0.36, 1] }}
+      variants={stagger}
+      initial={reduceMotion ? false : "hidden"}
+      animate="visible"
       className="mx-auto grid w-full max-w-[1360px] gap-14 px-5 pb-16 pt-16 sm:px-8 sm:pt-20 lg:grid-cols-[minmax(0,1.35fr)_minmax(260px,.65fr)] lg:gap-24 lg:px-16 lg:pb-20 lg:pt-24"
     >
-      <div>
+      <motion.div variants={revealLeft}>
         <div className="mb-7 flex flex-wrap gap-2.5">
           {project.categories.map((category) => (
             <span
@@ -59,9 +60,11 @@ export function ProjectDetailHero({ project }: { project: Project }) {
             Contact Me
           </a>
         </div>
-      </div>
+      </motion.div>
 
-      <ProjectMeta project={project} />
+      <motion.div variants={revealRight}>
+        <ProjectMeta project={project} />
+      </motion.div>
     </motion.section>
   );
 }

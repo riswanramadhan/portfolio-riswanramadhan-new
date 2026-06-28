@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
 import { useMotionValue, useSpring } from "motion/react";
 
 const PREVIEW_WIDTH = 300;
@@ -9,6 +9,26 @@ const VIEWPORT_MARGIN = 14;
 const CURSOR_GAP = 28;
 const positionSpring = { stiffness: 250, damping: 30, mass: 0.55 };
 const rotationSpring = { stiffness: 180, damping: 20, mass: 0.45 };
+const DESKTOP_PREVIEW_QUERY =
+  "(min-width: 1024px) and (any-hover: hover) and (any-pointer: fine)";
+
+function subscribeToDesktopPreview(onStoreChange: () => void) {
+  const mediaQuery = window.matchMedia(DESKTOP_PREVIEW_QUERY);
+  mediaQuery.addEventListener("change", onStoreChange);
+  return () => mediaQuery.removeEventListener("change", onStoreChange);
+}
+
+function getDesktopPreviewSnapshot() {
+  return window.matchMedia(DESKTOP_PREVIEW_QUERY).matches;
+}
+
+export function useDesktopFloatingPreview() {
+  return useSyncExternalStore(
+    subscribeToDesktopPreview,
+    getDesktopPreviewSnapshot,
+    () => false,
+  );
+}
 
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(Math.max(value, minimum), Math.max(minimum, maximum));

@@ -1,42 +1,33 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
-import { fadeScale, fadeUp, stagger } from "@/lib/animations";
+import {
+  fadeScale,
+  revealLeft,
+  revealRight,
+  stagger,
+} from "@/lib/animations";
 import { experiences, sectionContent } from "@/lib/portfolio-data";
-import { useFloatingPreviewMotion } from "@/lib/use-floating-preview";
+import {
+  useDesktopFloatingPreview,
+  useFloatingPreviewMotion,
+} from "@/lib/use-floating-preview";
 import { cn } from "@/lib/utils";
 import { FloatingCursorPreview } from "@/components/ui/FloatingCursorPreview";
 import { SectionFrame } from "@/components/ui/SectionFrame";
 
 export function ExperienceSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = Boolean(useReducedMotion());
+  const desktopPreviewEnabled = useDesktopFloatingPreview();
   const previewMotion = useFloatingPreviewMotion(reduceMotion);
   const activeExperience = activeIndex === null ? null : experiences[activeIndex];
 
-  useEffect(() => {
-    const closeOnOutsidePress = (event: PointerEvent) => {
-      if (
-        activeIndex !== null &&
-        sectionRef.current &&
-        !sectionRef.current.contains(event.target as Node)
-      ) {
-        setActiveIndex(null);
-        previewMotion.resetDirection();
-      }
-    };
-
-    document.addEventListener("pointerdown", closeOnOutsidePress);
-    return () => document.removeEventListener("pointerdown", closeOnOutsidePress);
-  }, [activeIndex, previewMotion]);
-
   return (
     <motion.section
-      ref={sectionRef}
       id="experience"
       aria-labelledby="experience-heading"
       variants={fadeScale}
@@ -44,7 +35,7 @@ export function ExperienceSection() {
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       onPointerLeave={(event) => {
-        if (event.pointerType === "mouse") {
+        if (desktopPreviewEnabled && event.pointerType === "mouse") {
           setActiveIndex(null);
           previewMotion.resetDirection();
         }
@@ -64,7 +55,7 @@ export function ExperienceSection() {
           </span>
 
           <motion.div
-            variants={fadeUp}
+            variants={revealLeft}
             className="relative z-10 flex flex-col gap-5 border-b border-white/12 pb-8 sm:flex-row sm:items-end sm:justify-between"
           >
             <h2 id="experience-heading" className="section-heading text-white">
@@ -82,15 +73,25 @@ export function ExperienceSection() {
               return (
                 <motion.article
                   key={experience.id}
-                  variants={fadeUp}
+                  variants={index % 2 === 0 ? revealLeft : revealRight}
                   onPointerEnter={(event) => {
-                    if (event.pointerType !== "mouse") return;
+                    if (
+                      !desktopPreviewEnabled ||
+                      event.pointerType !== "mouse"
+                    ) {
+                      return;
+                    }
                     previewMotion.resetDirection();
                     previewMotion.snapToPointer(event.clientX, event.clientY);
                     setActiveIndex(index);
                   }}
                   onPointerMove={(event) => {
-                    if (event.pointerType !== "mouse") return;
+                    if (
+                      !desktopPreviewEnabled ||
+                      event.pointerType !== "mouse"
+                    ) {
+                      return;
+                    }
                     if (!isActive) setActiveIndex(index);
                     previewMotion.moveToPointer(event.clientX, event.clientY);
                   }}
@@ -99,35 +100,11 @@ export function ExperienceSection() {
                     isActive && "border-transparent bg-white/[0.055]",
                   )}
                 >
-                  <button
-                    type="button"
-                    onClick={(event) => {
-                      const nextIndex = isActive ? null : index;
-                      setActiveIndex(nextIndex);
-                      if (nextIndex === null) {
-                        previewMotion.resetDirection();
-                      } else {
-                        previewMotion.moveToElement(event.currentTarget.getBoundingClientRect());
-                      }
-                    }}
-                    onFocus={(event) => {
-                      if (!event.currentTarget.matches(":focus-visible")) return;
-                      setActiveIndex(index);
-                      previewMotion.moveToElement(event.currentTarget.getBoundingClientRect());
-                    }}
-                    onKeyDown={(event) => {
-                      if (event.key === "Escape") {
-                        setActiveIndex(null);
-                        previewMotion.resetDirection();
-                        event.currentTarget.blur();
-                      }
-                    }}
-                    aria-pressed={isActive}
-                    aria-label={`Preview ${experience.company} experience`}
-                    className="grid min-h-[118px] w-full grid-cols-1 items-center gap-4 px-3 py-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white md:grid-cols-[minmax(0,1fr)_170px_44px] md:gap-7 md:px-5 md:py-5"
+                  <div
+                    className="grid min-h-[118px] w-full grid-cols-1 items-center gap-4 px-3 py-6 text-left lg:grid-cols-[minmax(0,1fr)_170px_44px] lg:gap-7 lg:px-5 lg:py-5"
                   >
                     <div className="min-w-0">
-                      <h3 className="text-[17px] font-medium tracking-[-0.025em] text-white transition-transform duration-700 ease-[var(--ease-apple)] group-hover:translate-x-1 sm:text-[19px]">
+                      <h3 className="text-[17px] font-medium tracking-[-0.025em] text-white transition-transform duration-700 ease-[var(--ease-apple)] sm:text-[19px] lg:group-hover:translate-x-1">
                         {experience.company}
                       </h3>
                       <p className="mt-1.5 text-[13px] text-white/45 sm:text-[15px]">
@@ -135,13 +112,13 @@ export function ExperienceSection() {
                       </p>
                     </div>
 
-                    <time className="text-[12px] font-medium text-white/52 md:text-right">
+                    <time className="text-[12px] font-medium text-white/52 lg:text-right">
                       {experience.period}
                     </time>
 
                     <span
                       className={cn(
-                        "hidden size-10 items-center justify-center rounded-full border border-white/12 text-white transition-all duration-700 ease-[var(--ease-apple)] md:flex",
+                        "hidden size-10 items-center justify-center rounded-full border border-white/12 text-white transition-all duration-700 ease-[var(--ease-apple)] lg:flex",
                         isActive
                           ? "rotate-0 bg-white text-black"
                           : "rotate-12 bg-white/5 text-white/65",
@@ -150,7 +127,7 @@ export function ExperienceSection() {
                     >
                       <ArrowUpRight className="icon-motion-orbit size-4" strokeWidth={1.5} />
                     </span>
-                  </button>
+                  </div>
                 </motion.article>
               );
             })}
@@ -161,7 +138,7 @@ export function ExperienceSection() {
       <FloatingCursorPreview
         image={activeExperience?.image}
         alt={activeExperience?.imageAlt}
-        visible={activeExperience !== null}
+        visible={desktopPreviewEnabled && activeExperience !== null}
         x={previewMotion.x}
         y={previewMotion.y}
         rotate={previewMotion.rotate}

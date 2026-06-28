@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
-import { fadeScale, fadeUp } from "@/lib/animations";
+import { fadeScale, revealLeft, revealRight } from "@/lib/animations";
 import {
   type FilterCategory,
   projects,
@@ -48,14 +48,14 @@ export function SelectedWorkSection() {
         <div className="relative z-10 mx-auto w-full max-w-[1280px]">
           <motion.h2
             id="work-heading"
-            variants={fadeUp}
+            variants={revealLeft}
             className="section-heading text-center"
           >
             {sectionContent.work.heading}
           </motion.h2>
 
           <motion.div
-            variants={fadeUp}
+            variants={revealRight}
             className="mb-12 mt-11 flex flex-col gap-5 border-b border-black/10 pb-6 sm:flex-row sm:items-center sm:justify-between md:mb-16"
           >
             <div
@@ -113,9 +113,9 @@ export function SelectedWorkSection() {
               id="selected-work-grid"
               key={activeFilter}
               role="tabpanel"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
+              initial={reduceMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.42, ease: [0.22, 1, 0.36, 1] }}
               className="grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 md:gap-y-16 lg:gap-x-12"
             >

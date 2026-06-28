@@ -3,7 +3,12 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
-import { fadeScale, fadeUp, stagger } from "@/lib/animations";
+import {
+  fadeScale,
+  revealLeft,
+  revealRight,
+  stagger,
+} from "@/lib/animations";
 import { navItems, profile, socialLinks } from "@/lib/portfolio-data";
 import { PillButton } from "@/components/ui/PillButton";
 import { SectionFrame } from "@/components/ui/SectionFrame";
@@ -29,7 +34,7 @@ export function HeroSection() {
           className="relative mx-auto grid h-full w-full max-w-[1440px] grid-rows-[auto_auto_minmax(0,1fr)_auto] overflow-hidden px-5 py-5 sm:px-8 sm:py-7 lg:grid-rows-[auto_auto_minmax(0,1fr)] lg:px-12 lg:pb-0 lg:pt-8"
         >
           <motion.header
-            variants={fadeUp}
+            variants={revealLeft}
             className="relative z-30 flex items-center justify-between gap-3"
           >
             <StatusPill label={profile.availability} />
@@ -56,25 +61,11 @@ export function HeroSection() {
               ))}
             </nav>
 
-            <PillButton
-              href={profile.email}
-              ariaLabel={`${profile.primaryCta} by email`}
-              className="hidden sm:inline-flex"
-            >
-              {profile.primaryCta}
-            </PillButton>
-            <PillButton
-              href={profile.email}
-              ariaLabel={`${profile.primaryCta} by email`}
-              className="size-11 min-h-0 px-0 sm:hidden"
-            >
-              <span className="sr-only">{profile.primaryCta}</span>
-            </PillButton>
           </motion.header>
 
           <motion.h1
             id="hero-title"
-            variants={fadeUp}
+            variants={revealLeft}
             aria-label={profile.name}
             className="relative z-[2] mt-[clamp(2rem,6svh,5rem)] flex flex-col items-center justify-center px-1 text-center text-[clamp(2.4rem,12.5vw,6.2rem)] font-bold uppercase leading-[0.82] tracking-[-0.085em] sm:text-[clamp(4.5rem,12vw,7.5rem)] lg:flex-row lg:gap-[0.09em] lg:text-[clamp(6rem,8.25vw,7.9rem)]"
           >
@@ -87,7 +78,7 @@ export function HeroSection() {
           </motion.h1>
 
           <motion.div
-            variants={fadeUp}
+            variants={revealRight}
             className="relative z-10 mx-auto h-full min-h-0 w-[min(92vw,650px)] sm:w-[min(78vw,700px)] lg:w-[min(52vw,760px)]"
           >
             <Image
@@ -104,7 +95,7 @@ export function HeroSection() {
             variants={stagger}
             className="relative z-20 flex flex-col items-start gap-4 pb-0 pt-3 lg:absolute lg:bottom-8 lg:left-12 lg:right-12 lg:flex-row lg:items-end lg:justify-between lg:gap-8 lg:pb-0 lg:pt-0"
           >
-            <motion.div variants={fadeUp} className="max-w-[300px]">
+            <motion.div variants={revealLeft} className="max-w-[300px]">
               <p className="mb-2 text-[clamp(1.1rem,4.7vw,1.45rem)] font-semibold leading-[1.05] tracking-[-0.045em] text-[#171717] lg:mb-3 lg:text-[clamp(1.25rem,2.2vw,1.65rem)]">
                 {profile.role}
               </p>
@@ -119,7 +110,7 @@ export function HeroSection() {
               className="flex w-full flex-wrap gap-2 lg:w-auto lg:flex-col lg:items-stretch lg:gap-3"
             >
               {socialLinks.map((link) => (
-                <motion.div key={link.label} variants={fadeUp}>
+                <motion.div key={link.label} variants={revealRight}>
                   <SocialPill
                     link={link}
                     compact
