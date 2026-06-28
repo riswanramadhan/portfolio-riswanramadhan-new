@@ -55,7 +55,7 @@ export function SocialPill({
       data-social={link.icon.toLowerCase()}
       className={cn(
         "social-brand group inline-flex min-h-10 items-center rounded-full border px-4 py-2 text-[12px] font-medium shadow-[0_9px_24px_rgba(0,0,0,.09)] backdrop-blur-xl transition-[transform,background-color,border-color,color,box-shadow] duration-500 ease-[var(--ease-apple)] hover:-translate-y-0.5 hover:text-white hover:shadow-[0_14px_34px_rgba(0,0,0,.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111] focus-visible:ring-offset-2 sm:text-[13px]",
-        profile ? "justify-start gap-3" : "justify-between gap-4",
+        profile ? "justify-start gap-2" : "justify-between gap-4",
         inverted
           ? "border-white/12 bg-white/7 text-white hover:bg-white/12"
           : "border-black/7 bg-white/72 text-[#222] hover:border-black/12 hover:bg-white",
@@ -70,7 +70,7 @@ export function SocialPill({
         link.icon === "Behance" && "hover:border-[#1769ff] hover:bg-[#1769ff]",
         link.icon === "Dribbble" && "hover:border-[#ea4c89] hover:bg-[#ea4c89]",
         profile &&
-          "min-w-[198px] border-black bg-[#1c1c1e] py-1.5 pl-1.5 pr-4 text-white shadow-[0_12px_32px_rgba(0,0,0,.2)] hover:border-black hover:bg-black hover:shadow-[0_16px_40px_rgba(0,0,0,.3)]",
+          "w-auto min-w-0 gap-2 border-black bg-[#1c1c1e] py-1.5 pl-1.5 pr-3 text-white shadow-[0_12px_32px_rgba(0,0,0,.2)] hover:border-black hover:bg-black hover:shadow-[0_16px_40px_rgba(0,0,0,.3)]",
         className,
       )}
     >

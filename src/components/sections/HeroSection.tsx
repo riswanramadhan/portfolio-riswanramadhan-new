@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
 import {
@@ -14,6 +13,7 @@ import { PillButton } from "@/components/ui/PillButton";
 import { SectionFrame } from "@/components/ui/SectionFrame";
 import { SocialPill } from "@/components/ui/SocialPill";
 import { StatusPill } from "@/components/ui/StatusPill";
+import { HeroPortraitReveal } from "@/components/ui/HeroPortraitReveal";
 import { TransitionLink } from "@/components/navigation/TransitionLink";
 
 export function HeroSection() {
@@ -81,13 +81,11 @@ export function HeroSection() {
             variants={revealRight}
             className="relative z-10 mx-auto h-full min-h-0 w-[min(92vw,650px)] sm:w-[min(78vw,700px)] lg:w-[min(52vw,760px)]"
           >
-            <Image
-              src={profile.avatar}
-              alt={profile.avatarAlt}
-              fill
+            <HeroPortraitReveal
+              blackWhiteSrc={profile.heroAvatarBlackWhite}
+              colorSrc={profile.heroAvatarColor}
+              alt={profile.heroAvatarAlt}
               priority
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 78vw, 760px"
-              className="object-contain object-bottom drop-shadow-[0_24px_24px_rgba(0,0,0,.14)]"
             />
           </motion.div>
 
@@ -102,7 +100,7 @@ export function HeroSection() {
               <p className="mb-4 max-w-[290px] text-[12px] leading-[1.5] text-[#666] sm:text-[13px] lg:mb-5 lg:text-sm lg:leading-[1.6]">
                 {profile.description}
               </p>
-              <PillButton href={profile.email}>{profile.primaryCta}</PillButton>
+              <PillButton href={profile.emailHref}>{profile.primaryCta}</PillButton>
             </motion.div>
 
             <motion.div

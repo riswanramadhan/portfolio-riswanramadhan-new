@@ -20,10 +20,13 @@ export function SelectedWorkSection() {
   const reduceMotion = useReducedMotion();
 
   const filteredProjects = useMemo(
-    () =>
-      activeFilter === "All"
-        ? projects
-        : projects.filter((project) => project.category === activeFilter),
+    () => {
+      if (activeFilter === "All") return projects;
+      if (activeFilter === "Real Project") {
+        return projects.filter((project) => project.type === "Real Project");
+      }
+      return projects.filter((project) => project.type !== "Real Project");
+    },
     [activeFilter],
   );
 
@@ -121,7 +124,7 @@ export function SelectedWorkSection() {
             >
               {filteredProjects.map((project, index) => (
                 <ProjectCard
-                  key={project.id}
+                  key={project.slug}
                   project={project}
                   priority={activeFilter === "All" && index < 2}
                   animationIndex={index}

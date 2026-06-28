@@ -18,7 +18,7 @@ import {
   useReducedMotion,
 } from "motion/react";
 
-import { navItems, socialLinks } from "@/lib/portfolio-data";
+import { navItems, profile, socialLinks } from "@/lib/portfolio-data";
 import { cn } from "@/lib/utils";
 import { SocialPill } from "@/components/ui/SocialPill";
 
@@ -475,9 +475,9 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
                     y: isMenuSelection ? -16 : 0,
                   }}
                   transition={{ duration: reduceMotion ? 0 : 0.45 }}
-                  className="w-fit text-left text-[13px] font-semibold uppercase tracking-[0.18em] text-white/64 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="mx-auto w-fit text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-white/64 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:mx-0 sm:text-left"
                 >
-                  Riswan Ramadhan
+                  {profile.name}
                 </motion.button>
 
                 <nav
@@ -605,7 +605,7 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
                     opacity: isMenuSelection ? 0 : 1,
                     y: isMenuSelection ? 16 : 0,
                   }}
-                  className="flex items-center gap-2"
+                  className="flex items-center justify-center gap-2 sm:justify-start"
                 >
                   {socialLinks.map((link) => (
                     <SocialPill

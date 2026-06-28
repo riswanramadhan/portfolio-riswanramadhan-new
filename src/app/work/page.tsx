@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { projects } from "@/lib/portfolio-data";
+import { pageContent, projects } from "@/lib/portfolio-data";
 import { SubpageHeader } from "@/components/layout/SubpageHeader";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ProjectCard } from "@/components/ui/ProjectCard";
@@ -8,8 +8,8 @@ import { RouteTitle } from "@/components/navigation/RouteTitle";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Selected Work — Riswan Ramadhan",
-  description: "A selection of digital products, websites, and product design work by Riswan Ramadhan.",
+  title: "Selected Work | Riswan Ramadhan",
+  description: pageContent.work.metadataDescription,
 };
 
 export default function WorkPage() {
@@ -26,7 +26,7 @@ export default function WorkPage() {
           </Reveal>
           <Reveal direction="right" delay={0.08}>
             <p className="max-w-[390px] text-[14px] leading-[1.65] text-black/52 md:text-right">
-              Digital products built through clear thinking, useful systems, and a careful eye for how people actually use them.
+              {pageContent.work.description}
             </p>
           </Reveal>
         </div>
@@ -34,7 +34,7 @@ export default function WorkPage() {
         <div className="grid grid-cols-1 gap-x-12 gap-y-16 md:grid-cols-2 lg:gap-y-20">
           {projects.map((project, index) => (
             <ProjectCard
-              key={project.id}
+              key={project.slug}
               project={project}
               priority={index < 2}
               animationIndex={index}

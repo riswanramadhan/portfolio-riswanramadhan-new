@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
 
-import { services } from "@/lib/portfolio-data";
+import { pageContent, services } from "@/lib/portfolio-data";
 import { SubpageHeader } from "@/components/layout/SubpageHeader";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ServiceSection } from "@/components/sections/ServiceSection";
 import { RouteTitle } from "@/components/navigation/RouteTitle";
+import { AnimatedNumberLine } from "@/components/ui/AnimatedNumberLine";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Services — Riswan Ramadhan",
-  description: "Product design, web development, branding, and motion services for useful digital products.",
+  title: "Services | Riswan Ramadhan",
+  description: pageContent.service.metadataDescription,
 };
-
-const process = [
-  ["01", "Discover", "Understand the product, audience, constraints, and the real problem worth solving."],
-  ["02", "Define", "Turn findings into a clear direction, useful scope, and an interface system."],
-  ["03", "Build", "Design and develop the experience with responsive, maintainable foundations."],
-  ["04", "Refine", "Test the details, polish interaction, and prepare the product for real use."],
-] as const;
 
 export default function ServicePage() {
   return (
@@ -34,10 +28,10 @@ export default function ServicePage() {
         <Reveal direction="right" delay={0.08} className="lg:justify-self-end">
           <div className="max-w-[480px]">
             <p className="text-[clamp(1.35rem,2.8vw,2.4rem)] font-medium leading-[1.12] tracking-[-0.04em]">
-              From early product thinking to a polished interface people can confidently use.
+              {pageContent.service.lead}
             </p>
             <p className="mt-6 text-[14px] leading-[1.7] text-black/50">
-              Each engagement combines focused strategy, restrained visual design, and a practical implementation path.
+              {pageContent.service.supporting}
             </p>
           </div>
         </Reveal>
@@ -52,21 +46,26 @@ export default function ServicePage() {
               delay={index * 0.055}
               className="h-full"
             >
-              <article className="h-full rounded-[24px] border border-black/7 bg-[#f7f7f8] p-7 sm:p-9">
+              <article className="h-full rounded-[24px] border border-black/7 bg-[#f7f7f8] px-6 py-8 sm:p-9">
                 <span className="text-[10px] font-semibold tracking-[0.18em] text-black/35">
                   [{service.number}]
                 </span>
-                <h2 className="mt-8 text-[clamp(1.8rem,4vw,3.1rem)] font-semibold leading-[0.94] tracking-[-0.055em]">
+                <h2 className="mt-7 text-[clamp(1.8rem,4vw,3.1rem)] font-semibold leading-[0.94] tracking-[-0.055em] sm:mt-8">
                   {service.title}
                 </h2>
-                <p className="mt-5 max-w-[520px] text-[13px] leading-[1.65] text-black/52 sm:text-sm">
-                  {service.description}
+                <p className="mt-6 max-w-[520px] text-[13px] leading-[1.7] text-black/52 sm:mt-5 sm:text-sm sm:leading-[1.65]">
+                  {service.shortDescription}
+                </p>
+                <p className="mt-5 max-w-[560px] text-[13px] leading-[1.75] text-black/62 sm:mt-4 sm:text-sm sm:leading-[1.7]">
+                  {service.fullDescription}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-2">
-                  {service.deliverables.map((item) => (
+                  {service.keywords.map((item) => (
                     <span
                       key={item}
-                      className="rounded-full border border-black/8 bg-white px-3 py-1.5 text-[11px] font-medium text-black/58"
+                      className={`rounded-full border border-black/8 bg-white px-3 py-1.5 text-[11px] font-medium text-black/58 ${
+                        service.featuredKeywords.includes(item) ? "" : "hidden sm:inline-flex"
+                      }`}
                     >
                       {item}
                     </span>
@@ -84,25 +83,32 @@ export default function ServicePage() {
         <div className="mx-auto w-full max-w-[1230px]">
           <Reveal direction="left">
             <p className="mb-12 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/38">
-              A clear working rhythm
+              {pageContent.service.processHeading}
             </p>
           </Reveal>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {process.map(([number, title, description], index) => (
+          <div className="grid gap-0 lg:grid-cols-4">
+            {pageContent.service.process.map(([number, title, description], index) => (
               <Reveal
                 key={title}
                 direction={index % 2 === 0 ? "left" : "right"}
                 delay={index * 0.055}
               >
-                <article className="border-t border-white/14 pt-5">
-                  <span className="text-[10px] text-white/34">[{number}]</span>
-                  <h2 className="mt-8 text-[24px] font-semibold tracking-[-0.04em]">
-                    {title}
-                  </h2>
-                  <p className="mt-4 text-[13px] leading-[1.65] text-white/48">
-                    {description}
-                  </p>
-                </article>
+                <AnimatedNumberLine
+                  number={number}
+                  index={index}
+                  total={pageContent.service.process.length}
+                  theme="dark"
+                  isLast={index === pageContent.service.process.length - 1}
+                >
+                  <div className={index < pageContent.service.process.length - 1 ? "lg:pr-8" : undefined}>
+                    <h2 className="text-[24px] font-semibold tracking-[-0.04em]">
+                      {title}
+                    </h2>
+                    <p className="mt-4 text-[13px] leading-[1.65] text-white/48">
+                      {description}
+                    </p>
+                  </div>
+                </AnimatedNumberLine>
               </Reveal>
             ))}
           </div>

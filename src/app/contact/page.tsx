@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 
+import { pageContent } from "@/lib/portfolio-data";
 import { SubpageHeader } from "@/components/layout/SubpageHeader";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { RouteTitle } from "@/components/navigation/RouteTitle";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Contact — Riswan Ramadhan",
-  description: "Start a conversation about a digital product, website, or design collaboration.",
+  title: "Contact | Riswan Ramadhan",
+  description: pageContent.contact.metadataDescription,
 };
 
 export default function ContactPage() {

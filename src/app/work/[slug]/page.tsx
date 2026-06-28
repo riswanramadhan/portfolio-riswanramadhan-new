@@ -20,13 +20,14 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
   if (!project) return {};
+  const description = `Case study of ${project.title}: ${project.description}`;
   return {
-    title: `${project.title} — Riswan Ramadhan`,
-    description: project.description,
+    title: `${project.title} | Riswan Ramadhan`,
+    description,
     openGraph: {
       title: project.title,
-      description: project.description,
-      images: [project.image],
+      description,
+      images: [project.previewImage],
     },
   };
 }
@@ -43,16 +44,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <ProjectPreviewFrame project={project} />
       <div className="mx-auto mt-20 w-full max-w-[1100px] px-5 pb-20 sm:px-8 lg:mt-28 lg:pb-28">
         <ProjectCaseSection index="01" label="Overview">
-          {project.caseStudy.overview}
+          {project.overview}
         </ProjectCaseSection>
         <ProjectCaseSection index="02" label="Challenge">
-          {project.caseStudy.challenge}
+          {project.challenge}
         </ProjectCaseSection>
         <ProjectCaseSection index="03" label="Solution">
-          {project.caseStudy.solution}
+          {project.solution}
         </ProjectCaseSection>
         <ProjectCaseSection index="04" label="Result">
-          {project.caseStudy.result}
+          {project.result}
         </ProjectCaseSection>
       </div>
       <ContactSection />

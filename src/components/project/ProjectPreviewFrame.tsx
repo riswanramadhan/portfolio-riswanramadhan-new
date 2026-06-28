@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
-import type { Project } from "@/lib/portfolio-data";
+import type { PortfolioProject } from "@/lib/portfolio-data";
 
-export function ProjectPreviewFrame({ project }: { project: Project }) {
+export function ProjectPreviewFrame({ project }: { project: PortfolioProject }) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -18,7 +18,7 @@ export function ProjectPreviewFrame({ project }: { project: Project }) {
     >
       <div className="relative aspect-[16/10] overflow-hidden rounded-[11px] bg-[#dddddb]">
         <Image
-          src={project.image}
+          src={project.previewImage}
           alt={project.imageAlt}
           fill
           priority

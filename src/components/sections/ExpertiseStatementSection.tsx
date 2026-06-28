@@ -20,8 +20,9 @@ import {
   type MotionValue,
 } from "motion/react";
 
-const statement =
-  "I blend product thinking, clean interface design, and frontend engineering to build digital experiences that help local businesses grow.";
+import { sectionContent } from "@/lib/portfolio-data";
+
+const statement = sectionContent.expertise.statement;
 
 interface Skill {
   label: string;
@@ -242,18 +243,34 @@ function SkillPill({
                 ease: "easeInOut",
               }
         }
-        whileHover={reducedMotion ? undefined : { y: -4, scale: 1.03 }}
+        whileHover={
+          reducedMotion
+            ? undefined
+            : {
+                y: -4,
+                scale: 1.03,
+                borderColor: `${skill.color}75`,
+                boxShadow: `0 18px 46px ${skill.color}35`,
+              }
+        }
         className={
           mobile
-            ? "flex min-h-10 max-w-full items-center gap-2 rounded-full border border-white/70 bg-white/82 py-1.5 pl-1.5 pr-3 text-[12px] font-medium text-[#2a2a2a] shadow-[0_12px_30px_rgba(0,0,0,0.07)] backdrop-blur-xl"
-            : "flex h-12 items-center gap-2.5 rounded-full border border-white/70 bg-white/80 py-[7px] pl-[7px] pr-[18px] text-[15px] font-medium text-[#2a2a2a] shadow-[0_18px_45px_rgba(0,0,0,0.08)] backdrop-blur-xl"
+            ? "group/skill relative flex min-h-10 max-w-full items-center gap-2 overflow-hidden rounded-full border border-white/70 bg-white/82 py-1.5 pl-1.5 pr-3 text-[12px] font-medium text-[#2a2a2a] shadow-[0_12px_30px_rgba(0,0,0,0.07)] backdrop-blur-xl"
+            : "group/skill relative flex h-12 items-center gap-2.5 overflow-hidden rounded-full border border-white/70 bg-white/80 py-[7px] pl-[7px] pr-[18px] text-[15px] font-medium text-[#2a2a2a] shadow-[0_18px_45px_rgba(0,0,0,0.08)] backdrop-blur-xl"
         }
       >
         <span
+          className="pointer-events-none absolute inset-y-0 left-[-55%] w-[46%] -skew-x-12 opacity-0 blur-[1px] transition-all duration-700 ease-[var(--ease-apple)] group-hover/skill:left-[118%] group-hover/skill:opacity-100"
+          style={{
+            background: `linear-gradient(90deg, ${skill.color}00, ${skill.color}4d, ${skill.color}00)`,
+          }}
+          aria-hidden="true"
+        />
+        <span
           className={
             mobile
-              ? "flex size-7 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
-              : "flex size-[34px] shrink-0 items-center justify-center rounded-full text-white shadow-sm"
+              ? "relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
+              : "relative z-10 flex size-[34px] shrink-0 items-center justify-center rounded-full text-white shadow-sm"
           }
           style={{ backgroundColor: skill.color }}
         >
@@ -263,7 +280,7 @@ function SkillPill({
             aria-hidden="true"
           />
         </span>
-        <span className="whitespace-nowrap">{skill.label}</span>
+        <span className="relative z-10 whitespace-nowrap">{skill.label}</span>
       </motion.div>
     </motion.div>
   );

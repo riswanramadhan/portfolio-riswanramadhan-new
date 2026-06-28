@@ -4,12 +4,13 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
-import type { Project } from "@/lib/portfolio-data";
+import type { PortfolioProject } from "@/lib/portfolio-data";
 import { cn } from "@/lib/utils";
 import { TransitionLink } from "@/components/navigation/TransitionLink";
+import { TechIcon } from "@/components/ui/TechIcon";
 
 interface ProjectCardProps {
-  project: Project;
+  project: PortfolioProject;
   priority?: boolean;
   animationIndex?: number;
   reduceMotion?: boolean;
@@ -69,15 +70,15 @@ export function ProjectCard({
           <span
             className={cn(
               "absolute left-4 top-4 z-10 rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] shadow-[0_8px_22px_rgba(0,0,0,.12)] backdrop-blur-xl sm:left-5 sm:top-5",
-              project.category === "Real Project"
+              project.type === "Real Project"
                 ? "border-white/10 bg-[#1c1c1e] text-white"
                 : "border-white/70 bg-white/82 text-[#1c1c1e]",
             )}
           >
-            {project.category}
+            {project.type}
           </span>
           <Image
-            src={project.image}
+            src={project.previewImage}
             alt={project.imageAlt}
             fill
             priority={priority}
@@ -92,8 +93,8 @@ export function ProjectCard({
         <div className="px-2 pb-2">
           <div className="mt-5 flex items-start justify-between gap-5">
             <div className="min-w-0">
-              <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[#777]">
-                {project.type}
+              <p className="mb-2 text-[11px] font-medium leading-[1.45] text-[#777] sm:text-[12px]">
+                {project.subtitle}
               </p>
               <h3 className="max-w-[520px] break-words pr-2 text-[clamp(1.35rem,2.1vw,1.9rem)] font-semibold leading-[1.04] tracking-[-0.045em] text-[#1a1a1a] [overflow-wrap:anywhere]">
                 {project.title}
@@ -104,14 +105,24 @@ export function ProjectCard({
             </span>
           </div>
 
+          <p className="mt-4 max-w-[580px] text-[12px] leading-[1.6] text-[#666] sm:text-[13px]">
+            {project.description}
+          </p>
+
           <div className="mt-4 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
+            {project.categories.map((category) => (
               <span
-                key={tag}
+                key={category}
                 className="rounded-full border border-black/9 bg-[#f7f7f8] px-3 py-1.5 text-[11px] font-medium text-[#555]"
               >
-                {tag}
+                {category}
               </span>
+            ))}
+          </div>
+
+          <div className="mt-3 flex flex-wrap gap-2 border-t border-black/7 pt-3">
+            {project.tools.map((tool) => (
+              <TechIcon key={tool} tool={tool} compact />
             ))}
           </div>
         </div>

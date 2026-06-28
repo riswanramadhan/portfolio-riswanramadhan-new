@@ -3,13 +3,13 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
-import type { Project } from "@/lib/portfolio-data";
+import { profile, type PortfolioProject } from "@/lib/portfolio-data";
 import { revealLeft, revealRight, stagger } from "@/lib/animations";
 import { ProjectMeta } from "@/components/project/ProjectMeta";
+import { TechIcon } from "@/components/ui/TechIcon";
 
-export function ProjectDetailHero({ project }: { project: Project }) {
+export function ProjectDetailHero({ project }: { project: PortfolioProject }) {
   const reduceMotion = useReducedMotion();
-  const shortTitle = project.title.split("—")[0].trim();
 
   return (
     <motion.section
@@ -32,10 +32,10 @@ export function ProjectDetailHero({ project }: { project: Project }) {
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:gap-5">
           <h1 className="text-[clamp(2.8rem,7vw,5.5rem)] font-semibold leading-[0.9] tracking-[-0.065em] text-[#171717]">
-            {shortTitle}
+            {project.title}
           </h1>
           <span className="pb-1 text-[17px] font-medium text-black/42 sm:text-[20px]">
-            /{project.category}
+            /{project.type}
           </span>
         </div>
 
@@ -44,21 +44,34 @@ export function ProjectDetailHero({ project }: { project: Project }) {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
+          {project.url ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex min-h-11 items-center gap-2.5 rounded-full bg-[#171717] px-5 text-[13px] font-medium text-white shadow-[0_13px_32px_rgba(0,0,0,.22)] transition-all duration-500 ease-[var(--ease-apple)] hover:-translate-y-0.5 hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+            >
+              Live Preview
+              <ArrowUpRight className="icon-motion-diagonal size-4 transition-transform duration-500" />
+            </a>
+          ) : null}
           <a
-            href={project.livePreviewUrl}
-            target={project.livePreviewUrl === "#" ? undefined : "_blank"}
-            rel={project.livePreviewUrl === "#" ? undefined : "noreferrer"}
-            className="group inline-flex min-h-11 items-center gap-2.5 rounded-full bg-[#171717] px-5 text-[13px] font-medium text-white shadow-[0_13px_32px_rgba(0,0,0,.22)] transition-all duration-500 ease-[var(--ease-apple)] hover:-translate-y-0.5 hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
-          >
-            Live Preview
-            <ArrowUpRight className="icon-motion-diagonal size-4 transition-transform duration-500" />
-          </a>
-          <a
-            href={project.contactUrl}
+            href={profile.emailHref}
             className="inline-flex min-h-11 items-center rounded-full border border-black/8 bg-white px-5 text-[13px] font-medium text-black shadow-[0_9px_25px_rgba(0,0,0,.07)] transition-all duration-500 ease-[var(--ease-apple)] hover:-translate-y-0.5 hover:shadow-[0_13px_30px_rgba(0,0,0,.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
           >
             Contact Me
           </a>
+        </div>
+
+        <div className="mt-6 border-t border-black/8 pt-5">
+          <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-black/36">
+            Tools
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {project.tools.map((tool) => (
+              <TechIcon key={tool} tool={tool} />
+            ))}
+          </div>
         </div>
       </motion.div>
 

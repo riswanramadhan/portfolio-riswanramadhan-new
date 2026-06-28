@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 
-import { siteMetadata } from "@/lib/portfolio-data";
+import { profile, siteMetadata } from "@/lib/portfolio-data";
 import { NavigationProvider } from "@/components/navigation/NavigationProvider";
 
 import "./globals.css";
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
   title: siteMetadata.title,
   description: siteMetadata.description,
   keywords: siteMetadata.keywords,
-  authors: [{ name: "Riswan Ramadhan" }],
-  creator: "Riswan Ramadhan",
+  authors: [{ name: profile.name }],
+  creator: profile.name,
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
     type: "website",
     url: "/",
-    siteName: "Riswan Ramadhan Portfolio",
+    siteName: `${profile.name} Portfolio`,
     images: [
       {
         url: "/images/projects/dekatlokal.png",

@@ -1,27 +1,35 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Code2,
+  LayoutGrid,
+  Palette,
+  Search,
+  type LucideIcon,
+} from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { revealLeft, revealRight, stagger } from "@/lib/animations";
-import { sectionContent, services } from "@/lib/portfolio-data";
 import {
-  useDesktopFloatingPreview,
-  useFloatingPreviewMotion,
-} from "@/lib/use-floating-preview";
+  sectionContent,
+  services,
+  type ServiceIconName,
+} from "@/lib/portfolio-data";
 import { cn } from "@/lib/utils";
-import { FloatingCursorPreview } from "@/components/ui/FloatingCursorPreview";
+
+const serviceIconMap: Record<ServiceIconName, LucideIcon> = {
+  Code: Code2,
+  Search,
+  Layout: LayoutGrid,
+  Palette,
+};
 
 export function ServiceSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = Boolean(useReducedMotion());
-  const desktopPreviewEnabled = useDesktopFloatingPreview();
-  const previewMotion = useFloatingPreviewMotion(reduceMotion);
-  const previewService =
-    previewIndex === null ? null : services[previewIndex];
 
   useEffect(() => {
     const closeOnOutsidePress = (event: PointerEvent) => {
@@ -31,14 +39,12 @@ export function ServiceSection() {
         !sectionRef.current.contains(event.target as Node)
       ) {
         setActiveIndex(null);
-        setPreviewIndex(null);
-        previewMotion.resetDirection();
       }
     };
 
     document.addEventListener("pointerdown", closeOnOutsidePress);
     return () => document.removeEventListener("pointerdown", closeOnOutsidePress);
-  }, [activeIndex, previewMotion]);
+  }, [activeIndex]);
 
   return (
     <motion.section
@@ -50,10 +56,8 @@ export function ServiceSection() {
       viewport={{ once: true, margin: "-80px" }}
       variants={stagger}
       onPointerLeave={(event) => {
-        if (desktopPreviewEnabled && event.pointerType === "mouse") {
+        if (event.pointerType === "mouse") {
           setActiveIndex(null);
-          setPreviewIndex(null);
-          previewMotion.resetDirection();
         }
       }}
       className="relative w-full scroll-mt-0 overflow-hidden bg-[var(--surface-soft)] px-5 py-20 sm:px-8 md:px-12 md:py-24 lg:px-[74px] lg:py-28"
@@ -67,9 +71,10 @@ export function ServiceSection() {
           {sectionContent.service.heading}
         </motion.h2>
 
-        <motion.div variants={stagger} className="flex flex-col gap-2">
+        <motion.div variants={stagger} className="flex flex-col gap-3 sm:gap-2">
           {services.map((service, index) => {
             const isActive = activeIndex === index;
+            const ServiceIcon = serviceIconMap[service.icon];
 
             return (
               <motion.article
@@ -87,30 +92,10 @@ export function ServiceSection() {
                       }
                 }
                 onPointerEnter={(event) => {
-                  if (
-                    !desktopPreviewEnabled ||
-                    event.pointerType !== "mouse"
-                  ) {
-                    return;
-                  }
-                  previewMotion.resetDirection();
-                  previewMotion.snapToPointer(event.clientX, event.clientY);
-                  setActiveIndex(index);
-                  setPreviewIndex(index);
-                }}
-                onPointerMove={(event) => {
-                  if (
-                    !desktopPreviewEnabled ||
-                    event.pointerType !== "mouse"
-                  ) {
-                    return;
-                  }
-                  if (!isActive) setActiveIndex(index);
-                  if (previewIndex !== index) setPreviewIndex(index);
-                  previewMotion.moveToPointer(event.clientX, event.clientY);
+                  if (event.pointerType === "mouse") setActiveIndex(index);
                 }}
                 className={cn(
-                  "group relative min-h-[116px] overflow-hidden rounded-[24px] border transition-[background-color,color,border-color,box-shadow] duration-700 ease-[var(--ease-apple)] sm:min-h-[128px]",
+                  "group relative min-h-[142px] overflow-hidden rounded-[24px] border transition-[background-color,color,border-color,box-shadow] duration-700 ease-[var(--ease-apple)] sm:min-h-[128px]",
                   isActive
                     ? "border-transparent bg-[#1c1c1e] text-white shadow-[0_24px_65px_rgba(0,0,0,.14)]"
                     : "border-black/8 bg-white/35 text-[#1d1d1f] shadow-[0_8px_28px_rgba(0,0,0,.025)] hover:bg-white/55 hover:shadow-[0_14px_38px_rgba(0,0,0,.055)]",
@@ -125,13 +110,14 @@ export function ServiceSection() {
                       : "focus-visible:ring-black",
                   )}
                   onClick={(event) => {
-                    if (desktopPreviewEnabled && event.detail > 0) return;
+                    if (
+                      event.detail > 0 &&
+                      window.matchMedia("(hover: hover) and (pointer: fine)").matches
+                    ) {
+                      return;
+                    }
                     const nextIndex = isActive ? null : index;
                     setActiveIndex(nextIndex);
-                    if (nextIndex === null) {
-                      setPreviewIndex(null);
-                      previewMotion.resetDirection();
-                    }
                   }}
                   onFocus={(event) => {
                     if (!event.currentTarget.matches(":focus-visible")) return;
@@ -140,8 +126,6 @@ export function ServiceSection() {
                   onKeyDown={(event) => {
                     if (event.key === "Escape") {
                       setActiveIndex(null);
-                      setPreviewIndex(null);
-                      previewMotion.resetDirection();
                       event.currentTarget.blur();
                     }
                   }}
@@ -153,7 +137,7 @@ export function ServiceSection() {
                 </button>
 
                 <div className="pointer-events-none relative z-10 px-5 sm:px-8 lg:px-10">
-                  <div className="flex min-h-[116px] items-center gap-4 sm:min-h-[128px] sm:gap-6">
+                  <div className="flex min-h-[142px] items-start gap-4 py-6 sm:min-h-[128px] sm:items-center sm:gap-6 sm:py-0">
                     <div className="flex min-w-0 flex-1 items-start gap-4 sm:gap-6">
                       <span
                         className={cn(
@@ -163,10 +147,32 @@ export function ServiceSection() {
                       >
                         [{service.number}]
                       </span>
-                      <h3 className="text-[clamp(1.7rem,4.2vw,3.2rem)] font-semibold leading-[0.94] tracking-[-0.06em]">
-                        {service.title}
-                      </h3>
+                      <div className="min-w-0">
+                        <h3 className="text-[clamp(1.55rem,4.2vw,3.2rem)] font-semibold leading-[0.94] tracking-[-0.06em]">
+                          {service.title}
+                        </h3>
+                        <p
+                          className={cn(
+                            "mt-4 max-w-[680px] text-[12px] leading-[1.65] transition-colors duration-500 sm:mt-3 sm:text-[13px] sm:leading-[1.55]",
+                            isActive ? "text-white/55" : "text-black/47",
+                          )}
+                        >
+                          {service.shortDescription}
+                        </p>
+                      </div>
                     </div>
+
+                    <span
+                      className={cn(
+                        "hidden size-10 shrink-0 items-center justify-center rounded-full border sm:flex",
+                        isActive
+                          ? "border-white/14 bg-white/8 text-white/72"
+                          : "border-black/8 bg-white/45 text-black/55",
+                      )}
+                      aria-hidden="true"
+                    >
+                      <ServiceIcon className="size-4" strokeWidth={1.6} />
+                    </span>
 
                     <motion.span
                       initial={false}
@@ -209,9 +215,24 @@ export function ServiceSection() {
                     }}
                     className="overflow-hidden"
                   >
-                    <p className="max-w-[660px] pb-7 pl-10 text-[13px] leading-[1.65] text-white/60 sm:pb-9 sm:pl-12 sm:text-sm lg:pb-10 lg:pl-14">
-                      {service.description}
-                    </p>
+                    <div className="max-w-[850px] pb-8 pl-10 pt-2 sm:pb-9 sm:pl-12 sm:pt-0 lg:pb-10 lg:pl-14">
+                      <p className="text-[13px] leading-[1.75] text-white/68 sm:text-sm sm:leading-[1.7]">
+                        {service.fullDescription}
+                      </p>
+                      <div className="mt-6 flex flex-wrap gap-2 sm:mt-5">
+                        {service.keywords.map((keyword) => (
+                          <span
+                            key={keyword}
+                            className={cn(
+                              "rounded-full border border-white/12 bg-white/7 px-3 py-1.5 text-[10px] font-medium text-white/65",
+                              !service.featuredKeywords.includes(keyword) && "hidden sm:inline-flex",
+                            )}
+                          >
+                            {keyword}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </motion.div>
                 </div>
               </motion.article>
@@ -219,16 +240,6 @@ export function ServiceSection() {
           })}
         </motion.div>
       </div>
-
-      <FloatingCursorPreview
-        image={previewService?.image}
-        alt={previewService?.imageAlt}
-        visible={desktopPreviewEnabled && previewService !== null}
-        x={previewMotion.x}
-        y={previewMotion.y}
-        rotate={previewMotion.rotate}
-        reduceMotion={reduceMotion}
-      />
     </motion.section>
   );
 }

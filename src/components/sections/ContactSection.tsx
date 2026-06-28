@@ -59,7 +59,7 @@ export function ContactSection() {
             </motion.p>
             <motion.div variants={revealLeft} className="mt-8">
               <PillButton
-                href={profile.email}
+                href={profile.emailHref}
                 ariaLabel={`${profile.contactCta} by email`}
                 className="px-6"
               >
