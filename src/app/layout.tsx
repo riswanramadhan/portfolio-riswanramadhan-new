@@ -17,9 +17,13 @@ export const metadata: Metadata = {
   title: siteMetadata.title,
   description: siteMetadata.description,
   icons: {
-    icon: [{ url: profile.heroAvatarColor, type: "image/webp" }],
-    shortcut: profile.heroAvatarColor,
-    apple: "/images/avatarhero-color.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   keywords: siteMetadata.keywords,
   authors: [{ name: profile.name }],
@@ -32,9 +36,9 @@ export const metadata: Metadata = {
     siteName: `${profile.name} Portfolio`,
     images: [
       {
-        url: "/images/projects/dekatlokal.png",
-        width: 1536,
-        height: 1024,
+        url: "/images/projects/dekatlokal-work.webp",
+        width: 2400,
+        height: 1800,
         alt: "Riswan Ramadhan portfolio preview",
       },
     ],
@@ -43,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteMetadata.title,
     description: siteMetadata.description,
-    images: ["/images/projects/dekatlokal.png"],
+    images: ["/images/projects/dekatlokal-work.webp"],
   },
 };
 

@@ -15,7 +15,7 @@ import { PillButton } from "@/components/ui/PillButton";
 import { SectionFrame } from "@/components/ui/SectionFrame";
 import { SocialPill } from "@/components/ui/SocialPill";
 import { StatusPill } from "@/components/ui/StatusPill";
-import { HeroPortraitReveal } from "@/components/ui/HeroPortraitReveal";
+import { HoverColorRevealImage } from "@/components/ui/HoverColorRevealImage";
 import { CvPreviewModal } from "@/components/ui/CvPreviewModal";
 import { TransitionLink } from "@/components/navigation/TransitionLink";
 
@@ -35,9 +35,14 @@ export function HeroSection() {
         className="relative z-10 h-[100svh] min-h-0 scroll-mt-0 overflow-visible"
       >
         <SectionFrame className="h-full overflow-visible">
+        <div className="hero-ambient" aria-hidden="true">
+          <span className="hero-ambient__orb hero-ambient__orb--one" />
+          <span className="hero-ambient__orb hero-ambient__orb--two" />
+          <span className="hero-ambient__orb hero-ambient__orb--three" />
+        </div>
         <motion.div
           variants={stagger}
-          className="relative mx-auto grid h-full w-full max-w-[1440px] grid-rows-[auto_auto_minmax(0,1fr)_auto] overflow-visible px-5 py-5 sm:px-8 sm:py-7 lg:grid-rows-[auto_auto_minmax(0,1fr)] lg:px-12 lg:pb-0 lg:pt-8"
+          className="relative z-10 mx-auto grid h-full w-full max-w-[1440px] grid-rows-[auto_auto_minmax(0,1fr)_auto] overflow-visible px-5 py-5 sm:px-8 sm:py-7 lg:grid-rows-[auto_auto_minmax(0,1fr)] lg:px-12 lg:pb-0 lg:pt-8"
         >
           <motion.header
             variants={revealLeft}
@@ -73,25 +78,28 @@ export function HeroSection() {
             id="hero-title"
             variants={revealLeft}
             aria-label={profile.name}
-            className="relative z-[2] mt-[clamp(2rem,6svh,5rem)] flex flex-col items-center justify-center px-1 text-center text-[clamp(2.4rem,12.5vw,6.2rem)] font-bold uppercase leading-[0.82] tracking-[-0.085em] sm:text-[clamp(4.5rem,12vw,7.5rem)] lg:flex-row lg:gap-[0.09em] lg:text-[clamp(6rem,8.25vw,7.9rem)]"
+            className="relative left-[-3vw] z-[2] mt-[clamp(2rem,6svh,5rem)] flex w-full justify-self-center flex-col items-center justify-center px-1 text-center text-[clamp(2.25rem,11.4vw,6.2rem)] font-bold uppercase leading-[0.82] tracking-[-0.085em] sm:left-0 sm:text-[clamp(4.5rem,12vw,7.5rem)] lg:flex-row lg:gap-[0.09em] lg:text-[clamp(6rem,8.25vw,7.9rem)]"
           >
-            <span className="text-[#111111]" aria-hidden="true">
+            <span className="w-full text-center text-[#111111] lg:w-auto" aria-hidden="true">
               {profile.firstName}
             </span>
-            <span className="outline-text" aria-hidden="true">
+            <span className="outline-text w-full text-center lg:w-auto" aria-hidden="true">
               {profile.lastName}
             </span>
           </motion.h1>
 
           <motion.div
             variants={revealRight}
-            className="relative z-10 mx-auto h-full min-h-0 w-[min(100vw,680px)] origin-bottom translate-y-[4%] scale-[1.10] will-change-transform sm:w-[min(82vw,760px)] sm:translate-y-[7%] sm:scale-[1.14] lg:w-[min(56vw,820px)] lg:translate-y-[10%] lg:scale-[1.18]"
+            className="relative left-[-4vw] z-10 mx-auto h-full min-h-0 w-[min(100vw,680px)] origin-bottom translate-y-[4%] scale-[1.10] justify-self-center will-change-transform sm:left-0 sm:w-[min(82vw,760px)] sm:translate-y-[7%] sm:scale-[1.14] lg:w-[min(56vw,820px)] lg:translate-y-[10%] lg:scale-[1.18]"
           >
-            <HeroPortraitReveal
+            <HoverColorRevealImage
+              src={profile.heroAvatarColor}
               blackWhiteSrc={profile.heroAvatarBlackWhite}
-              colorSrc={profile.heroAvatarColor}
               alt={profile.heroAvatarAlt}
               priority
+              sizes="(max-width: 640px) 105vw, (max-width: 1024px) 88vw, 900px"
+              className="h-full w-full drop-shadow-[0_24px_24px_rgba(0,0,0,.14)]"
+              imageClassName="object-contain object-bottom"
             />
           </motion.div>
 

@@ -193,8 +193,8 @@ export const projects: PortfolioProject[] = [
     url: "https://dekatlokal.com",
     status: "Live",
     tools: ["Next.js", "React", "Cloudflare", "Neon", "SEO"],
-    previewImage: "/images/projects/dekatlokal.png",
-    imageAlt: "Temporary monochrome platform preview for DekatLokal",
+    previewImage: "/images/projects/dekatlokal-work.webp",
+    imageAlt: "DekatLokal digital checkup and website platform preview",
     overview:
       "DekatLokal is a platform I founded to help local UMKM start digitalization with a more structured approach. The platform provides Digital Checkup, readiness mapping, recommendations, and website support for businesses that are ready to grow online.",
     challenge:
@@ -219,8 +219,8 @@ export const projects: PortfolioProject[] = [
     url: "https://growmates.dekatlokal.com/",
     status: "Live",
     tools: ["Next.js", "React", "Supabase", "SEO"],
-    previewImage: "/images/projects/growmates.png",
-    imageAlt: "Temporary monochrome community preview for Growmates",
+    previewImage: "/images/projects/growmates-work.webp",
+    imageAlt: "Growmates volunteer and donation platform preview",
     overview:
       "Growmates is a dynamic platform for volunteer activities and donations. It helps users discover programs, register as volunteers, donate, and follow activities through a more organized digital flow.",
     challenge:
@@ -245,8 +245,8 @@ export const projects: PortfolioProject[] = [
     url: "https://bhekti.art",
     status: "Live",
     tools: ["Laravel", "Laravel Filament", "MySQL", "SEO"],
-    previewImage: "/images/projects/dekatlokal.png",
-    imageAlt: "Temporary monochrome catalog preview for Bhekti Art",
+    previewImage: "/images/projects/bhektiart-work.webp",
+    imageAlt: "Bhekti Art dynamic catalog website preview",
     overview:
       "Bhekti Art is a dynamic catalog website for handmade craft and art products. The website showcases products, categories, testimonials, contact information, and business identity in a more professional digital format.",
     challenge:
@@ -271,8 +271,8 @@ export const projects: PortfolioProject[] = [
     url: "https://www.rayalawfirm.com/",
     status: "Live",
     tools: ["Next.js", "React", "SEO"],
-    previewImage: "/images/projects/dekatlokal.png",
-    imageAlt: "Temporary monochrome website preview for Raya Law Firm",
+    previewImage: "/images/projects/rayalawfirm-work.webp",
+    imageAlt: "Raya Law Firm multipage company profile website preview",
     overview:
       "Raya Law Firm is a multipage company profile website built to present the firm’s legal services, professional positioning, credibility, and consultation flow.",
     challenge:
@@ -296,8 +296,8 @@ export const projects: PortfolioProject[] = [
     year: "2026",
     status: "Internal System",
     tools: ["Next.js", "React", "Supabase"],
-    previewImage: "/images/projects/rbm-attendance.png",
-    imageAlt: "Temporary monochrome dashboard preview for the Rumah BUMN attendance system",
+    previewImage: "/images/projects/attendance-work.webp",
+    imageAlt: "Rumah BUMN Makassar attendance system dashboard preview",
     overview:
       "This attendance system was built for Rumah BUMN Makassar to support daily internship attendance operations for around 40 users with check-in and check-out flow.",
     challenge:
@@ -321,8 +321,8 @@ export const projects: PortfolioProject[] = [
     year: "2026",
     status: "Private / Event System",
     tools: ["Next.js", "React", "Supabase"],
-    previewImage: "/images/projects/rbm-attendance.png",
-    imageAlt: "Temporary monochrome dashboard preview for the offline-ready POS system",
+    previewImage: "/images/projects/possystem-work.webp",
+    imageAlt: "Offline-ready POS cashier and kitchen order system preview",
     overview:
       "This POS system was built to support warung makan operations during an event, connecting cashier input with kitchen workflow and sales reporting.",
     challenge:
@@ -346,8 +346,8 @@ export const projects: PortfolioProject[] = [
     year: "2026",
     status: "Prototype",
     tools: ["Next.js", "React", "Google Gemini"],
-    previewImage: "/images/projects/chayon.png",
-    imageAlt: "Temporary monochrome product preview for AI-Powered Career Analysis",
+    previewImage: "/images/projects/aicareer-work.webp",
+    imageAlt: "AI-powered career analysis product preview",
     overview:
       "AI-Powered Career Analysis was created to help students and job seekers understand what is missing between their current resume and the requirements of a target job.",
     challenge:
@@ -372,8 +372,8 @@ export const projects: PortfolioProject[] = [
     url: "https://si-abah.dekatlokal.com/",
     status: "Live Prototype",
     tools: ["Next.js", "React", "Google Gemini"],
-    previewImage: "/images/projects/chayon.png",
-    imageAlt: "Temporary monochrome product preview for SI ABAH",
+    previewImage: "/images/projects/khutbah-work.webp",
+    imageAlt: "SI ABAH and KhutbahKit AI khutbah generator preview",
     overview:
       "SI ABAH helps users create khutbah or Islamic speech drafts by selecting event type, speaker name, title, duration, tone, audience, language, and religious references.",
     challenge:
@@ -398,8 +398,8 @@ export const projects: PortfolioProject[] = [
     url: "https://tracker.dekatlokal.com/",
     status: "Live",
     tools: ["Next.js", "React", "Local Storage"],
-    previewImage: "/images/projects/rbm-attendance.png",
-    imageAlt: "Temporary monochrome dashboard preview for BBI Cash Tracker",
+    previewImage: "/images/projects/cashtacker-work.webp",
+    imageAlt: "BBI Cash Tracker local-first sales tracking preview",
     overview:
       "BBI Cash Tracker is a lightweight sales tracker for recording packages sold, capital, profit, monthly revenue, and sales growth.",
     challenge:
@@ -423,8 +423,8 @@ export const projects: PortfolioProject[] = [
     year: "2025",
     status: "Design Study",
     tools: ["Figma"],
-    previewImage: "/images/projects/dekatlokal.png",
-    imageAlt: "Temporary monochrome web preview for the Web Redesign Collection",
+    previewImage: "/images/projects/webredesign-work.webp",
+    imageAlt: "Web redesign collection preview",
     overview:
       "This project combines three website redesign studies: Adidas, Wise, and Danantara Indonesia. The work focused on improving interface clarity, visual hierarchy, spacing, and modern layout execution.",
     challenge:
@@ -448,8 +448,8 @@ export const projects: PortfolioProject[] = [
     year: "2025",
     status: "Prototype",
     tools: ["Figma"],
-    previewImage: "/images/projects/rbm-attendance.png",
-    imageAlt: "Temporary monochrome dashboard preview for the EMR Hospital UI/UX project",
+    previewImage: "/images/projects/emrhospital-work.webp",
+    imageAlt: "EMR Hospital UI/UX dashboard prototype preview",
     overview:
       "EMR Hospital UI/UX is a full dashboard prototype for hospital operations, covering multiple modules from patient queue and examination to pharmacy, billing, and reporting.",
     challenge:
@@ -473,8 +473,8 @@ export const projects: PortfolioProject[] = [
     year: "2025",
     status: "Prototype",
     tools: ["Figma"],
-    previewImage: "/images/projects/growmates.png",
-    imageAlt: "Temporary monochrome mobile preview for Arung Culture",
+    previewImage: "/images/projects/arungculture-work.webp",
+    imageAlt: "Arung Culture cultural event and costume rental platform preview",
     overview:
       "Arung Culture is a UI/UX design concept for a cultural platform that combines event discovery and traditional clothing rental in South Sulawesi.",
     challenge:
