@@ -12,9 +12,9 @@ export default function Home() {
       <HeroSection />
       <ExpertiseStatementSection />
       <SelectedWorkSection />
-      <ServiceSection />
-      <ExperienceSection />
-      <ContactSection />
+      <ServiceSection compact />
+      <ExperienceSection compact />
+      <ContactSection compact />
     </SiteShell>
   );
 }

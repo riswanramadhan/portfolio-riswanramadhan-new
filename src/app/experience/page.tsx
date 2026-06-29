@@ -57,11 +57,11 @@ export default function ExperiencePage() {
                 total={pageContent.experience.principles.length}
                 isLast={index === pageContent.experience.principles.length - 1}
               >
-                <div className={index < pageContent.experience.principles.length - 1 ? "lg:pr-9" : undefined}>
-                  <h2 className="text-[24px] font-semibold tracking-[-0.045em]">
+                <div className={index < pageContent.experience.principles.length - 1 ? "pr-1 lg:pr-9" : "pr-1"}>
+                  <h2 className="min-h-[3.3rem] text-[22px] font-semibold leading-[1.15] tracking-[-0.045em] sm:min-h-0 sm:text-[24px] lg:min-h-[3.3rem]">
                     {title}
                   </h2>
-                  <p className="mt-4 text-[13px] leading-[1.65] text-black/48">
+                  <p className="mt-2.5 text-[13px] leading-[1.7] text-black/48 sm:mt-4">
                     {description}
                   </p>
                 </div>

@@ -14,6 +14,7 @@ interface ProjectCardProps {
   priority?: boolean;
   animationIndex?: number;
   reduceMotion?: boolean;
+  className?: string;
 }
 
 export function ProjectCard({
@@ -21,6 +22,7 @@ export function ProjectCard({
   priority = false,
   animationIndex = 0,
   reduceMotion,
+  className,
 }: ProjectCardProps) {
   const prefersReducedMotion = Boolean(useReducedMotion());
   const shouldReduceMotion = reduceMotion ?? prefersReducedMotion;
@@ -59,7 +61,7 @@ export function ProjectCard({
         y: { type: "spring", stiffness: 240, damping: 24 },
         scale: { type: "spring", stiffness: 220, damping: 24 },
       }}
-      className="group h-full min-w-0"
+      className={cn("group h-full min-w-0", className)}
     >
       <TransitionLink
         href={`/work/${project.slug}`}
@@ -122,7 +124,7 @@ export function ProjectCard({
 
           <div className="mt-3 flex flex-wrap gap-2 border-t border-black/7 pt-3">
             {project.tools.map((tool) => (
-              <TechIcon key={tool} tool={tool} compact />
+              <TechIcon key={tool} tool={tool} compact brandOnHover />
             ))}
           </div>
         </div>

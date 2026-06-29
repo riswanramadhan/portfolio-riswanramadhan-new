@@ -108,11 +108,22 @@ export const profile = {
   contactCta: "Contact Me",
   email: "riswan@dekatlokal.com",
   emailHref: "mailto:riswan@dekatlokal.com",
-  avatar: "/images/avatar.png",
+  avatar: "/images/avatarhero-color.webp",
   avatarAlt: "Portrait of Riswan Ramadhan",
   heroAvatarBlackWhite: "/images/avatarhero-blackwhite.webp",
   heroAvatarColor: "/images/avatarhero-color.webp",
   heroAvatarAlt: "Riswan Ramadhan standing with folded arms",
+  cv: {
+    label: "Curriculum Vitae (CV)",
+    pdfHref: "/images/Curriculum%20Vitae_Riswan%20Ramadhan.pdf",
+    downloadName: "Curriculum Vitae - Riswan Ramadhan.pdf",
+    driveHref:
+      "https://drive.google.com/file/d/1cWmq3kgOVHFr4uCVHLI4-VoqHymdIHxH/view?usp=sharing",
+    previewPages: [
+      "/images/cv/riswan-ramadhan-cv-page-1.webp",
+      "/images/cv/riswan-ramadhan-cv-page-2.webp",
+    ],
+  },
 };
 
 export const navItems: NavItem[] = [

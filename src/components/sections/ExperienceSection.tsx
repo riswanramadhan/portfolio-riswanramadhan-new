@@ -20,7 +20,11 @@ import { FloatingCursorPreview } from "@/components/ui/FloatingCursorPreview";
 import { SectionFrame } from "@/components/ui/SectionFrame";
 import { TechIcon } from "@/components/ui/TechIcon";
 
-export function ExperienceSection() {
+interface ExperienceSectionProps {
+  compact?: boolean;
+}
+
+export function ExperienceSection({ compact = false }: ExperienceSectionProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const reduceMotion = Boolean(useReducedMotion());
@@ -47,7 +51,12 @@ export function ExperienceSection() {
     >
       <SectionFrame
         variant="dark"
-        className="bg-[#1c1c1e] px-5 py-20 sm:px-8 md:px-12 md:py-24 lg:px-[74px] lg:py-28"
+        className={cn(
+          "bg-[#1c1c1e] px-5 sm:px-8 md:px-12 lg:px-[74px]",
+          compact
+            ? "py-16 md:py-20 lg:py-20"
+            : "py-20 md:py-24 lg:py-28",
+        )}
       >
         <div className="relative mx-auto w-full max-w-[1280px]">
           <span

@@ -300,14 +300,14 @@ export function ExpertiseStatementSection() {
       ref={sectionRef}
       id="expertise"
       aria-labelledby="expertise-statement-heading"
-      className="relative overflow-hidden bg-[var(--surface-warm)] px-5 py-16 sm:px-6 sm:py-24 lg:py-40"
+      className="relative overflow-hidden bg-[var(--surface-warm)] px-5 py-10 sm:px-6 sm:py-14 lg:py-20"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.95),rgba(245,245,245,0.4)_45%,transparent_70%)]"
       />
 
-      <div className="relative mx-auto flex min-h-[440px] w-full max-w-[1360px] min-w-0 items-center justify-center sm:min-h-[500px] lg:min-h-[560px]">
+      <div className="relative mx-auto flex min-h-[400px] w-full max-w-[1360px] min-w-0 items-center justify-center sm:min-h-[460px] lg:min-h-[520px]">
         {skills.map((skill, index) => (
           <SkillPill
             key={skill.label}

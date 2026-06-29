@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { ArrowUpRight } from "lucide-react";
 import {
   AnimatePresence,
   LayoutGroup,
@@ -466,7 +467,7 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
             className="fixed inset-0 z-[120] h-[100dvh] min-h-[100svh] w-screen overflow-hidden overscroll-none bg-[#161617] text-white shadow-[0_35px_100px_rgba(0,0,0,.4)] focus:outline-none"
           >
             {isMenuContentVisible ? (
-              <div className="relative flex h-full min-h-0 flex-col px-6 py-7 sm:px-10 sm:py-9 lg:px-14">
+              <div className="relative flex h-full min-h-0 flex-col px-6 pb-[max(3.75rem,env(safe-area-inset-bottom))] pt-[max(4.75rem,env(safe-area-inset-top))] sm:px-10 sm:py-9 lg:px-14">
                 <motion.button
                   type="button"
                   onClick={() => navigate("/", "Home")}
@@ -580,7 +581,11 @@ export function NavigationProvider({ children }: NavigationProviderProps) {
                                 : "translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-70",
                             )}
                           >
-                            ↗
+                            <ArrowUpRight
+                              className="icon-motion-diagonal size-4"
+                              strokeWidth={1.7}
+                              aria-hidden="true"
+                            />
                           </span>
                         </span>
                         {item.count ? (

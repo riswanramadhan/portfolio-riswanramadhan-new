@@ -104,7 +104,7 @@ export default function ServicePage() {
                     <h2 className="text-[24px] font-semibold tracking-[-0.04em]">
                       {title}
                     </h2>
-                    <p className="mt-4 text-[13px] leading-[1.65] text-white/48">
+                    <p className="mt-3 text-[13px] leading-[1.65] text-white/48 sm:mt-4">
                       {description}
                     </p>
                   </div>

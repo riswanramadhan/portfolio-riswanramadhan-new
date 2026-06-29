@@ -153,7 +153,8 @@ export function AnimatedNumberLine({
     <article
       className={cn(
         "relative",
-        responsive && "pb-10 pl-12 last:pb-0 lg:pb-0 lg:pl-0",
+        responsive &&
+          "grid grid-cols-[2.25rem_minmax(0,1fr)] items-start gap-x-5 pb-11 last:pb-0 sm:pb-12 lg:block lg:pb-0",
         horizontal && "pl-0",
         vertical && "pb-10 pl-12 last:pb-0",
         className,
@@ -161,7 +162,7 @@ export function AnimatedNumberLine({
     >
       {responsive ? (
         <>
-          <div className="absolute inset-y-0 left-0 lg:hidden">
+          <div className="relative col-start-1 row-start-1 min-h-full lg:hidden">
             {renderNode()}
             {renderVerticalRail()}
           </div>
@@ -188,7 +189,8 @@ export function AnimatedNumberLine({
 
       <div
         className={cn(
-          responsive && "pt-0 lg:pt-14",
+          responsive &&
+            "col-start-2 row-start-1 min-w-0 self-start pt-0 lg:block lg:pt-14",
           horizontal && "pt-14",
           vertical && "pt-0",
           contentClassName,

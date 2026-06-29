@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.url),
   title: siteMetadata.title,
   description: siteMetadata.description,
+  icons: {
+    icon: [{ url: profile.heroAvatarColor, type: "image/webp" }],
+    shortcut: profile.heroAvatarColor,
+    apple: "/images/avatarhero-color.png",
+  },
   keywords: siteMetadata.keywords,
   authors: [{ name: profile.name }],
   creator: profile.name,

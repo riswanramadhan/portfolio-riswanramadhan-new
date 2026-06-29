@@ -17,8 +17,13 @@ import { PillButton } from "@/components/ui/PillButton";
 import { SectionFrame } from "@/components/ui/SectionFrame";
 import { SocialPill } from "@/components/ui/SocialPill";
 import { StatusPill } from "@/components/ui/StatusPill";
+import { cn } from "@/lib/utils";
 
-export function ContactSection() {
+interface ContactSectionProps {
+  compact?: boolean;
+}
+
+export function ContactSection({ compact = false }: ContactSectionProps) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -33,11 +38,19 @@ export function ContactSection() {
     >
       <SectionFrame
         variant="light"
-        className="min-h-[620px] px-5 py-14 sm:px-8 md:px-14 md:py-18"
+        className={cn(
+          "px-5 sm:px-8 md:px-14",
+          compact
+            ? "min-h-[560px] py-12 md:py-14"
+            : "min-h-[620px] py-14 md:py-18",
+        )}
       >
         <motion.div
           variants={stagger}
-          className="relative z-10 mx-auto flex min-h-[500px] w-full max-w-[1280px] flex-col items-center justify-between text-center md:min-h-[500px]"
+          className={cn(
+            "relative z-10 mx-auto flex w-full max-w-[1280px] flex-col items-center justify-between text-center",
+            compact ? "min-h-[450px]" : "min-h-[500px]",
+          )}
         >
           <motion.div variants={revealLeft}>
             <StatusPill label={profile.availability} />
@@ -70,20 +83,25 @@ export function ContactSection() {
 
           <motion.div
             variants={stagger}
-            className="flex w-full flex-wrap items-center justify-center gap-2.5 sm:gap-3"
+            className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"
           >
-            {contactLinks.map((link, index) => (
-              <motion.div
-                key={link.label}
-                variants={index % 2 === 0 ? revealLeft : revealRight}
-              >
-                <SocialPill
-                  link={link}
-                  compact
-                  profile={link.icon === "User"}
-                />
-              </motion.div>
-            ))}
+            <motion.div
+              variants={revealLeft}
+              className="flex w-full justify-center sm:w-auto"
+            >
+              <SocialPill link={contactLinks[0]} compact profile />
+            </motion.div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+              {contactLinks.slice(1).map((link, index) => (
+                <motion.div
+                  key={link.label}
+                  variants={index % 2 === 0 ? revealRight : revealLeft}
+                >
+                  <SocialPill link={link} compact />
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </SectionFrame>

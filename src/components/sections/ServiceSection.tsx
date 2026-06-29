@@ -26,7 +26,11 @@ const serviceIconMap: Record<ServiceIconName, LucideIcon> = {
   Palette,
 };
 
-export function ServiceSection() {
+interface ServiceSectionProps {
+  compact?: boolean;
+}
+
+export function ServiceSection({ compact = false }: ServiceSectionProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = Boolean(useReducedMotion());
@@ -60,7 +64,12 @@ export function ServiceSection() {
           setActiveIndex(null);
         }
       }}
-      className="relative w-full scroll-mt-0 overflow-hidden bg-[var(--surface-soft)] px-5 py-20 sm:px-8 md:px-12 md:py-24 lg:px-[74px] lg:py-28"
+      className={cn(
+        "relative w-full scroll-mt-0 overflow-hidden bg-[var(--surface-soft)] px-5 sm:px-8 md:px-12 lg:px-[74px]",
+        compact
+          ? "py-16 md:py-20 lg:py-20"
+          : "py-20 md:py-24 lg:py-28",
+      )}
     >
       <div className="mx-auto w-full max-w-[1280px]">
         <motion.h2
